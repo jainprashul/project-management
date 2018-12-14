@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { signUp } from '../../store/actions/authActions';
+
 class SignUp extends Component {
   state = {
     email: '',
@@ -17,10 +19,11 @@ class SignUp extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state)
+    //console.log(this.state)
+    this.props.signUp(this.state)
   }
   render() {
-    const { auth } = this.props;
+    const { auth, authError } = this.props;
     if (auth.uid) return <Redirect to='/' />
     return (
       <div className='container'>
@@ -29,11 +32,11 @@ class SignUp extends Component {
         
         <div className="input-field">
           <label htmlFor="email">Email</label>
-          <input type="email" id='email' onChange={this.handleChange} />
+          <input type="email" id='email' autocomplete="username email" onChange={this.handleChange} />
         </div>
         <div className="input-field">
           <label htmlFor="password">Password</label>
-          <input type="password" id='password' onChange={this.handleChange} />
+          <input type="password" id='password' autocomplete="new-password" onChange={this.handleChange} />
         </div>
         <div className="input-field">
           <label htmlFor="firstName">First Name</label>
@@ -45,7 +48,10 @@ class SignUp extends Component {
         </div>
 
         <div className="input-field">
-          <button className='btn pink lighten-1 z-depth-0'>Login</button>
+          <button className='btn pink lighten-1 z-depth-0'>SignUp</button>
+        </div>
+        <div className="red-text center">
+          {authError ? <p>{authError}</p>: null }
         </div>
         </form>
       </div>
@@ -55,8 +61,15 @@ class SignUp extends Component {
 
 const mapStateToProps = (state) => {
   return{
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    authError: state.auth.authError
   }
 }
 
-export default connect(mapStateToProps)(SignUp)
+const mapDispatchToProps = (dispatch) => {
+  return{
+    signUp: (newUser) => dispatch(signUp(newUser))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
