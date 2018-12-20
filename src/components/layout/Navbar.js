@@ -12,7 +12,7 @@ const Navbar = (props) =>{
     return(
         <nav className="nav-wrapper grey darken-3">
             <div className="container">
-                <Link to='/' className='brand-logo'>MarioPlan</Link>
+                <Link to='/' className='brand-logo left'>MarioPlan</Link>
                 {links}
 
             </div>
@@ -21,7 +21,7 @@ const Navbar = (props) =>{
 }
 
 const mapStateToProps = (state) => {
-    //console.log(state);
+    console.log(state);
     return{
         auth: state.firebase.auth,
         profile:  state.firebase.profile
