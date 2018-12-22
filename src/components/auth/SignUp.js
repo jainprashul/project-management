@@ -32,11 +32,11 @@ class SignUp extends Component {
         
         <div className="input-field">
           <label htmlFor="email">Email</label>
-          <input type="email" id='email' autocomplete="username email" onChange={this.handleChange} />
+          <input type="email" id='email' autoComplete="username email" onChange={this.handleChange} />
         </div>
         <div className="input-field">
           <label htmlFor="password">Password</label>
-          <input type="password" id='password' autocomplete="new-password" onChange={this.handleChange} />
+          <input type="password" id='password' autoComplete="new-password" onChange={this.handleChange} />
         </div>
         <div className="input-field">
           <label htmlFor="firstName">First Name</label>
